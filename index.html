@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title></title>
+  </head>
+  <body>
+    <div class='search-container'>
+      <form>
+        <label for='option'>Search for a Book</label>
+        <br /><br />
+        <select name='option' id='option'>
+          <option value='intitle'>Title</option>
+          <option value='inauthor'>Author</option>
+          <option value='inpublisher'>Publisher</option>
+          <option value='subject'>Subject</option>
+        </select>
+        <input type="text" class="searchBox" placeholder="Option Keyword">
+        <br />
+        <input type="text" class="searchBox2" placeholder="">
+        <input type='image' src='https://i.imgur.com/Vr7y17U.png' class='submit' alt='search' width='25px' height='25px'>
+      </form>
+    </div>
+    <div class='results-container'>
+      <div class="carousel">
+      </div>
+      <div class="carousel-btns">
+        <button id='prev' aria-label='previous slide'><</button>
+        <button id='next'aria-label='next slide'>></button>
+      </div>
+    </div>
+  </body>
+</html>
