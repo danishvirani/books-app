@@ -70,6 +70,7 @@ form, select, {
   border-radius: 15px;
   text-align: center;
   margin-left: 1.1em;
+  margin-bottom: 1em;
 }
 .submit {
   transform: translateX(-3.25em) translateY(.4em);
@@ -101,4 +102,10 @@ form, select, {
 }
 .bookTitle {
   font-family: 'Encode Sans SC', sans-serif;
+}
+.random {
+  background-color: rgba(0,23,123,.8);
+  color: white;
+  border-radius: 15px;
+  padding: .5em;
 }
