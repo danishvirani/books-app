@@ -49,31 +49,44 @@ $(() => {
           .text(data.items[i].volumeInfo.title)
           $div.append($h2)
 
+          //create book summary div to organize data on screen
+          $div2 = $('<div>')
+          .addClass('bookSum')
+          .attr('id', 'bookSum' + i)
+          $div.append($div2)
+
           //book picture
           $bookImg = $('<img>')
           .addClass('bookImg')
           .attr('id', 'bookImg' + i)
           .attr('src', data.items[i].volumeInfo.imageLinks.smallThumbnail)
-          $div.append($bookImg)
+          .css({'height': '288', 'width': '192'})
+          $div2.append($bookImg)
+
+          //div for book info
+          $div3 = $('<div>')
+          .addClass('bookSumRight')
+          .attr('id', 'bookSumRight' + i)
+          $div2.append($div3)
 
           //book information
           $bookAuthor = $('<p>')
           .addClass('bookAuthor')
           .attr('id', 'bookAuthor' + i)
-          .text(data.items[i].volumeInfo.authors)
-          $div.append($bookAuthor)
+          .text('Author: ' + data.items[i].volumeInfo.authors)
+          $div3.append($bookAuthor)
 
           $bookPublisher = $('<p>')
           .addClass('bookPublisher')
           .attr('id', 'bookPublisher' + i)
-          .text(data.items[i].volumeInfo.publisher)
-          $div.append($bookPublisher)
+          .text('Publisher: ' + data.items[i].volumeInfo.publisher)
+          $div3.append($bookPublisher)
 
           $bookPublishedDate = $('<p>')
           .addClass('bookPublishedDate')
           .attr('id', 'bookPublishedDate' + i)
-          .text(data.items[i].volumeInfo.publishedDate)
-          $div.append($bookPublishedDate)
+          .text('Year Published: ' + data.items[i].volumeInfo.publishedDate)
+          $div3.append($bookPublishedDate)
 
           $bookInfo = $('<a>')
           .addClass('bookInfo')
@@ -86,7 +99,6 @@ $(() => {
           $bookAmazon = $('<a>')
           .addClass('bookAmazon')
           .attr('id', 'bookAmazon' + i)
-          .text('Buy it on Amazon')
           .attr('href', 'https://www.amazon.com/s?k=' + data.items[i].volumeInfo.title)
           $div.append($bookAmazon)
 

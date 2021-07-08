@@ -1,12 +1,13 @@
 body {
   background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGlicmFyeXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
   margin-top: 5em;
+  font-family: 'Inter', sans-serif;
 }
 .carousel {
   overflow: hidden;
   max-width: 70%;
   position: relative;
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255,255,255,1);
   justify-content: center;
   display: flex;
   margin: 0 auto;
@@ -23,6 +24,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.bookAuthor {
+  transform: translate(12em 0em 0em 6em);
 }
 .carousel-btns {
   display: flex;
@@ -55,6 +59,7 @@ label {
   color: white;
   font-size: 2em;
   margin-bottom: 1em;
+  font-family: 'Encode Sans SC', sans-serif;
 }
 form, select, {
   font-size: 1.5em;
@@ -68,4 +73,32 @@ form, select, {
 }
 .submit {
   transform: translateX(-3.25em) translateY(.4em);
+}
+.bookInfo {
+  background-color: rgba(0,23,123,.8);
+  color: white;
+  padding: 1em;
+  border-radius: 15px;
+}
+.bookAmazon {
+  background-image: url('https://www.citypng.com/public/uploads/preview/-11596324215y9g3jpw3wf.png');
+  background-size: cover;
+  width: 12em;
+  height: 4em;
+}
+.bookSum {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3em;
+}
+.bookSum > img {
+  margin-right: 2em;
+}
+.bookSumRight {
+  display: flex;
+  flex-direction: column;
+}
+.bookTitle {
+  font-family: 'Encode Sans SC', sans-serif;
 }
