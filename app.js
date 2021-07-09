@@ -88,6 +88,33 @@ $(() => {
           .text('Year Published: ' + data.items[i].volumeInfo.publishedDate)
           $div3.append($bookPublishedDate)
 
+          $bookDescriptionButton = $('<button>')
+          .addClass('bookDescriptionButton')
+          .attr('id', 'bookDescriptionButton' + i)
+          .text('Description')
+          $div.append($bookDescriptionButton)
+
+          $bookDescription = $('<p>')
+          .addClass('bookDescription')
+          .attr('id', 'bookDescription' + i)
+          .text(data.items[i].volumeInfo.description)
+          .hide()
+          $div.append($bookDescription)
+
+
+            $('#bookDescriptionButton' + i).on('click', (event) => {
+
+                if($('#bookDescriptionButton' + i).text() === 'Description'){
+                  $('#bookDescription' + i).show()
+                  $('#bookDescriptionButton' + i).text('Hide')
+                  console.log('show')
+                } else {
+                  $('#bookDescription' + i).hide()
+                  $('#bookDescriptionButton' + i).text('Description')
+                }
+            })
+
+
           $bookInfo = $('<a>')
           .addClass('bookInfo')
           .attr('id', 'bookInfo' + i)

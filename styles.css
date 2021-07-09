@@ -81,6 +81,11 @@ form, select, {
   padding: 1em;
   border-radius: 15px;
 }
+.bookInfo:hover {
+  color: rgb(0,23,123);
+  border: .2em solid rgb(0,23,123);
+  background-color: white;
+}
 .bookAmazon {
   background-image: url('https://www.citypng.com/public/uploads/preview/-11596324215y9g3jpw3wf.png');
   background-size: cover;
@@ -108,4 +113,25 @@ form, select, {
   color: white;
   border-radius: 15px;
   padding: .5em;
+}
+.random:hover {
+  background-color: white;
+  color: rgb(0,23,123);
+  border: .2em solid rgb(0,23,123);
+}
+.bookDescriptionButton {
+  background-color: rgba(63,63,63,.8);
+  color: white;
+  padding: 1em;
+  border-radius: 15px;
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+.bookDescriptionButton:hover {
+  color: rgb(63,63,63);
+  background-color: white;
+  border: .2em solid rgb(63,63,63);
+}
+.bookDescription {
+  margin: 0em 2em 2em 2em;
 }
