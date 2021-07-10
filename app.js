@@ -131,7 +131,7 @@ $(() => {
 
 
         }
-      // $('#bookDiv0').removeClass('bookDiv')
+
       $('#bookDiv0').addClass('active')
       $('#next').click(function() {
           let currentDiv = $('.bookDiv.active')
@@ -196,7 +196,9 @@ $(() => {
 
     $.ajax({
       url: 'https://random-word-api.herokuapp.com/word?number=1',
-      type: 'GET'
+      type: 'GET',
+      mode: 'cors',
+      credentials: 'include'
     }).then(
       (word) => {
         console.log(word)
@@ -362,28 +364,6 @@ $(() => {
   //----------------------------------------------------------------------------------------------------------------------//
   //Quiz script
 
-//   $('#bookDiv0').addClass('active')
-//   $('#next').click(function() {
-//     let currentDiv = $('.bookDiv.active')
-//     let nextDiv = currentDiv.next()
-//     currentDiv.removeClass('active')
-//     nextDiv.addClass('active')
-//
-//     if(nextDiv.length === 0){
-//   $('.bookDiv').first().addClass('active')
-//   }
-// })
-// $('#prev').click(function() {
-//   let currentDiv = $('.bookDiv.active')
-//   let previousDiv = currentDiv.prev()
-//   currentDiv.removeClass('active')
-//   previousDiv.addClass('active')
-//
-//   if(previousDiv.length === 0){
-//     $('.bookDiv').last().addClass('active')
-//   }
-
-// })
 
   const questions = [
     {question: 'What Year Was Book Published', answerA: '1999', answerB: '1998', answerC: '2001', answerD: '2000'},
@@ -429,18 +409,6 @@ $(() => {
     .text(questions[i].answerD)
     $questionsDiv.append($choiceD)
 
-    // if($('.questionForm.activeQ').prev())
-    // $prevQuestion = $('<button>')
-    // .addClass('previousQuestion')
-    // .attr('id', 'previousQuestionButton')
-    // .text('Previous')
-    // $questionsDiv.append($prevQuestion)
-    //
-    // $nextQuestion = $('<button>')
-    // .addClass('nextQuestion')
-    // .attr('id', 'nextQuestionButton')
-    // .text('Next')
-    // $questionsDiv.append($nextQuestion)
   }
 
 
@@ -485,120 +453,6 @@ $(() => {
 
   })
 
-
-  //
-  // $('#next').click(function() {
-  //     let currentDiv = $('.bookDiv.active')
-  //     let nextDiv = currentDiv.next()
-  //     currentDiv.removeClass('active')
-  //     nextDiv.addClass('active')
-  //
-  //     if(nextDiv.length === 0){
-  //   $('.bookDiv').first().addClass('active')
-  //   }
-  // })
-  // $('#prev').click(function() {
-  //   let currentDiv = $('.bookDiv.active')
-  //   let previousDiv = currentDiv.prev()
-  //   currentDiv.removeClass('active')
-  //   previousDiv.addClass('active')
-  //
-  //   if(previousDiv.length === 0){
-  //     $('.bookDiv').last().addClass('active')
-  //   }
-
-  // const $startBtn = $('#startBtn')
-  // const $nextBtn = $('#nextBtn')
-  // const $questionsContainer = $('#questions-container')
-  // let questionRandom
-  // let currentQuestionIndex
-  // const $question = $('#question')
-  // const $answerbtns = $('#answerBtns')
-  //
-  //
-  // $startBtn.on('click', (event) => {
-  //   startGame()
-  // })
-  //
-  // const startGame = () => {
-  //   console.log('Started')
-  //   $startBtn.addClass('hide')
-  //   questionRandom = questions.sort(() => Math.random() -.5)
-  //   currentQuestionIndex = 0
-  //   $questionsContainer.removeClass('hide')
-  //   nextQuestion()
-  // }
-  // const reset = () => {
-  //   $nextBtn.addClass('hide')
-  //   $answerbtns.empty()
-  // }
-  //
-  // const nextQuestion = () => {
-  //   reset()
-  //   showQuestion(questionRandom[currentQuestionIndex])
-  // }
-  //
-  // const showQuestion = (question) => {
-  //   $question.text(question.question)
-  //   question.answers.forEach(answer => {
-  //       const $button = $('<button>')
-  //       .addClass('btn')
-  //       .text(answer.option)
-  //       console.log(answer.option)
-  //       if (answer.answer == true) {
-  //         $button.answer = answer.answer
-  //       }
-  //       $button.on('click', (event) => {
-  //         chooseAnswer()
-  //       })
-  //       $answerbtns.append($button)
-  //     })
-  // }
-  //
-  // const chooseAnswer = (event) => {
-  //   const buttonChoice = event.target
-  //   const rightAnswer = buttonChoice.answer
-  //   console.log(event.target)
-  //   Array.from($answerbtns.children).forEach(button => {
-  //     setClass(button, button.answer)
-  //   })
-  // }
-  //
-  // const setClass = (element, correct) => {
-  //   clearClass(element)
-  //   if (correct) {
-  //     element.addClass('correct')
-  //   } else {
-  //     element.addClass('wrong')
-  //   }
-  // }
-  //
-  // const clearClass = (element) => {
-  //   element.removeClass('correct')
-  //   element.removeClass('wrong')
-  // }
-
-  // let score = 0
-  // const questions = [
-  //   {
-  //     question: 'What Year was Harry Potter Published?',
-  //     answers: [
-  //       {option: '2001', answer: true},
-  //       {option: '1997', answer: false}
-  //     ]
-  //   }
-  // ]
-  //
-  // for (let i = 0; i < questions.length; i++){
-  //   response = window.prompt(questions[i].prompt)
-  //   if (response == questions[i].answer){
-  //     score++
-  //     alert('Correct!')
-  //   } else {
-  //     alert('Wrong!')
-  //   }
-  // }
-  // alert('you got' + score + '/' + questions.length)
 
   //---------------------------------------------------------------------------------------------------------------------//
 
