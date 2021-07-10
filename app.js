@@ -155,9 +155,8 @@ $(() => {
 
       })
 
-
-
     })
+
 
     $.ajax({
       url: 'https://random-word-api.herokuapp.com/word?number=1',
@@ -267,6 +266,32 @@ $(() => {
               .text('Year Published: ' +  data.items[i].volumeInfo.publishedDate)
               $div3.append($bookPublishedDate)
 
+              $bookDescriptionButton = $('<button>')
+              .addClass('bookDescriptionButton')
+              .attr('id', 'bookDescriptionButton' + i)
+              .text('Description')
+              $div.append($bookDescriptionButton)
+
+              $bookDescription = $('<p>')
+              .addClass('bookDescription')
+              .attr('id', 'bookDescription' + i)
+              .text(data.items[i].volumeInfo.description)
+              .hide()
+              $div.append($bookDescription)
+
+
+                $('#bookDescriptionButton' + i).on('click', (event) => {
+
+                    if($('#bookDescriptionButton' + i).text() === 'Description'){
+                      $('#bookDescription' + i).show()
+                      $('#bookDescriptionButton' + i).text('Hide')
+                      console.log('show')
+                    } else {
+                      $('#bookDescription' + i).hide()
+                      $('#bookDescriptionButton' + i).text('Description')
+                    }
+                })
+
               $bookInfo = $('<a>')
               .addClass('bookInfo')
               .attr('id', 'bookInfo' + i)
@@ -333,6 +358,250 @@ $(() => {
 
 
   })
+
+  //----------------------------------------------------------------------------------------------------------------------//
+  //Quiz script
+
+//   $('#bookDiv0').addClass('active')
+//   $('#next').click(function() {
+//     let currentDiv = $('.bookDiv.active')
+//     let nextDiv = currentDiv.next()
+//     currentDiv.removeClass('active')
+//     nextDiv.addClass('active')
+//
+//     if(nextDiv.length === 0){
+//   $('.bookDiv').first().addClass('active')
+//   }
+// })
+// $('#prev').click(function() {
+//   let currentDiv = $('.bookDiv.active')
+//   let previousDiv = currentDiv.prev()
+//   currentDiv.removeClass('active')
+//   previousDiv.addClass('active')
+//
+//   if(previousDiv.length === 0){
+//     $('.bookDiv').last().addClass('active')
+//   }
+
+// })
+
+  const questions = [
+    {question: 'What Year Was Book Published', answerA: '1999', answerB: '1998', answerC: '2001', answerD: '2000'},
+    {question: 'Who Is The Author Of Book', answerA: 'author1', answerB: 'author2', answerC: 'author3', answerD: 'author4'},
+    {question: 'What Year Was Book 2 Published', answerA: '2003', answerB: '2004', answerC: '2005', answerD: '2005'},
+    {question: 'Who Is The Author Of Book2', answerA: 'author5', answerB: 'author6', answerC: 'author7', answerD: 'author8'}
+  ]
+
+  for (let i = 0; i < questions.length; i++){
+
+    $questionsDiv = $('<div>')
+    .addClass('questionsForm')
+    .attr('id', 'questionsForm' + i)
+    $('#questions-container').append($questionsDiv)
+
+    $question = $('<h2>')
+    .addClass('question')
+    .attr('id', 'question' + i)
+    .text(questions[i].question)
+    $questionsDiv.append($question)
+
+    $choiceA = $('<button>')
+    .addClass('choices')
+    .attr('id', 'choiceA' + i)
+    .text(questions[i].answerA)
+    $questionsDiv.append($choiceA)
+
+    $choiceB = $('<button>')
+    .addClass('choices')
+    .attr('id', 'choiceB' + i)
+    .text(questions[i].answerB)
+    $questionsDiv.append($choiceB)
+
+    $choiceC = $('<button>')
+    .addClass('choices')
+    .attr('id', 'choiceC' + i)
+    .text(questions[i].answerC)
+    $questionsDiv.append($choiceC)
+
+    $choiceD = $('<button>')
+    .addClass('choices')
+    .attr('id', 'choiceD' + i)
+    .text(questions[i].answerD)
+    $questionsDiv.append($choiceD)
+
+    // if($('.questionForm.activeQ').prev())
+    // $prevQuestion = $('<button>')
+    // .addClass('previousQuestion')
+    // .attr('id', 'previousQuestionButton')
+    // .text('Previous')
+    // $questionsDiv.append($prevQuestion)
+    //
+    // $nextQuestion = $('<button>')
+    // .addClass('nextQuestion')
+    // .attr('id', 'nextQuestionButton')
+    // .text('Next')
+    // $questionsDiv.append($nextQuestion)
+  }
+
+
+  $('#questionsForm0').addClass('activeQ')
+  $('#nextQuestionButton').click(function() {
+
+    let currentQuestion = $('.questionsForm.activeQ')
+    let nextQuestion = currentQuestion.next()
+    let buttonCheck = nextQuestion.next()
+
+    if(buttonCheck.length === 0){
+      $('#nextQuestionButton').text('Submit')
+    }
+    if(nextQuestion.length === 0){
+      $('#nextQuestionButton').hide()
+      $('#prevQuestionButton').hide()
+    } else {
+      $('#prevQuestionButton').show()
+    }
+    currentQuestion.removeClass('activeQ')
+    nextQuestion.addClass('activeQ')
+
+
+  })
+
+  $('#prevQuestionButton').hide()
+
+  $('#prevQuestionButton').click(function() {
+
+    let currentQuestion = $('.questionsForm.activeQ')
+    let previousQuestion = currentQuestion.prev()
+    let buttonCheck = previousQuestion.prev()
+
+    if(buttonCheck.length == 0){
+      $('#prevQuestionButton').hide()
+    }
+
+    currentQuestion.removeClass('activeQ')
+    previousQuestion.addClass('activeQ')
+
+
+
+  })
+
+
+  //
+  // $('#next').click(function() {
+  //     let currentDiv = $('.bookDiv.active')
+  //     let nextDiv = currentDiv.next()
+  //     currentDiv.removeClass('active')
+  //     nextDiv.addClass('active')
+  //
+  //     if(nextDiv.length === 0){
+  //   $('.bookDiv').first().addClass('active')
+  //   }
+  // })
+  // $('#prev').click(function() {
+  //   let currentDiv = $('.bookDiv.active')
+  //   let previousDiv = currentDiv.prev()
+  //   currentDiv.removeClass('active')
+  //   previousDiv.addClass('active')
+  //
+  //   if(previousDiv.length === 0){
+  //     $('.bookDiv').last().addClass('active')
+  //   }
+
+  // const $startBtn = $('#startBtn')
+  // const $nextBtn = $('#nextBtn')
+  // const $questionsContainer = $('#questions-container')
+  // let questionRandom
+  // let currentQuestionIndex
+  // const $question = $('#question')
+  // const $answerbtns = $('#answerBtns')
+  //
+  //
+  // $startBtn.on('click', (event) => {
+  //   startGame()
+  // })
+  //
+  // const startGame = () => {
+  //   console.log('Started')
+  //   $startBtn.addClass('hide')
+  //   questionRandom = questions.sort(() => Math.random() -.5)
+  //   currentQuestionIndex = 0
+  //   $questionsContainer.removeClass('hide')
+  //   nextQuestion()
+  // }
+  // const reset = () => {
+  //   $nextBtn.addClass('hide')
+  //   $answerbtns.empty()
+  // }
+  //
+  // const nextQuestion = () => {
+  //   reset()
+  //   showQuestion(questionRandom[currentQuestionIndex])
+  // }
+  //
+  // const showQuestion = (question) => {
+  //   $question.text(question.question)
+  //   question.answers.forEach(answer => {
+  //       const $button = $('<button>')
+  //       .addClass('btn')
+  //       .text(answer.option)
+  //       console.log(answer.option)
+  //       if (answer.answer == true) {
+  //         $button.answer = answer.answer
+  //       }
+  //       $button.on('click', (event) => {
+  //         chooseAnswer()
+  //       })
+  //       $answerbtns.append($button)
+  //     })
+  // }
+  //
+  // const chooseAnswer = (event) => {
+  //   const buttonChoice = event.target
+  //   const rightAnswer = buttonChoice.answer
+  //   console.log(event.target)
+  //   Array.from($answerbtns.children).forEach(button => {
+  //     setClass(button, button.answer)
+  //   })
+  // }
+  //
+  // const setClass = (element, correct) => {
+  //   clearClass(element)
+  //   if (correct) {
+  //     element.addClass('correct')
+  //   } else {
+  //     element.addClass('wrong')
+  //   }
+  // }
+  //
+  // const clearClass = (element) => {
+  //   element.removeClass('correct')
+  //   element.removeClass('wrong')
+  // }
+
+  // let score = 0
+  // const questions = [
+  //   {
+  //     question: 'What Year was Harry Potter Published?',
+  //     answers: [
+  //       {option: '2001', answer: true},
+  //       {option: '1997', answer: false}
+  //     ]
+  //   }
+  // ]
+  //
+  // for (let i = 0; i < questions.length; i++){
+  //   response = window.prompt(questions[i].prompt)
+  //   if (response == questions[i].answer){
+  //     score++
+  //     alert('Correct!')
+  //   } else {
+  //     alert('Wrong!')
+  //   }
+  // }
+  // alert('you got' + score + '/' + questions.length)
+
+  //---------------------------------------------------------------------------------------------------------------------//
+
 
 
 

@@ -131,7 +131,22 @@ form, select, {
   color: rgb(63,63,63);
   background-color: white;
   border: .2em solid rgb(63,63,63);
+  cursor: pointer;
 }
 .bookDescription {
   margin: 0em 2em 2em 2em;
+}
+.correct {
+  background-color: green;
+  color: white;
+}
+.wrong {
+  background-color: red;
+  color: white;
+}
+.questionsForm {
+  display: none;
+}
+.questionsForm.activeQ {
+  display: flex;
 }
