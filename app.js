@@ -366,13 +366,16 @@ $(() => {
 
 
   const questions = [
-    {question: 'What Year Was Book Published', answerA: '1999', answerB: '1998', answerC: '2001', answerD: '2000'},
-    {question: 'Who Is The Author Of Book', answerA: 'author1', answerB: 'author2', answerC: 'author3', answerD: 'author4'},
-    {question: 'What Year Was Book 2 Published', answerA: '2003', answerB: '2004', answerC: '2005', answerD: '2005'},
-    {question: 'Who Is The Author Of Book2', answerA: 'author5', answerB: 'author6', answerC: 'author7', answerD: 'author8'}
+    {question: 'What Year Was Book Published', answerA: '1999', answerB: '1998', answerC: '2001', answerD: '2000', correct: '1999'},
+    {question: 'Who Is The Author Of Book', answerA: 'author1', answerB: 'author2', answerC: 'author3', answerD: 'author4', correct: 'author2'},
+    {question: 'What Year Was Book 2 Published', answerA: '2003', answerB: '2004', answerC: '2005', answerD: '2006', correct: '2005'},
+    {question: 'Who Is The Author Of Book2', answerA: 'author5', answerB: 'author6', answerC: 'author7', answerD: 'author8', correct: 'author8'}
   ]
 
+  let score = 0
+
   for (let i = 0; i < questions.length; i++){
+
 
     $questionsDiv = $('<div>')
     .addClass('questionsForm')
@@ -384,34 +387,131 @@ $(() => {
     .attr('id', 'question' + i)
     .text(questions[i].question)
     $questionsDiv.append($question)
+    $questionsDiv.append('<br>')
 
     $choiceA = $('<button>')
     .addClass('choices')
     .attr('id', 'choiceA' + i)
     .text(questions[i].answerA)
+
+      $choiceA.on('click', function() {
+      //remove onclick for other buttons with the same # id
+
+      //https://stackoverflow.com/questions/19053917/enable-the-button-to-be-clicked-only-to-once-exception
+      $(this).off('click')
+      $(this).siblings().off('click')
+
+        if($('#choiceA' + i).text() == questions[i].correct){
+          console.log('correct')
+          score++
+          //score calculator
+          console.log(score)
+          let scorePercentage = (score / questions.length)*100
+          $('#score').text(`Score: ${scorePercentage}%`)
+          $('#choiceA' + i).css('background', 'green')
+        } else {
+          console.log('wrong')
+          $('#choiceA' + i).css('background', 'red')
+        }
+      })
+
     $questionsDiv.append($choiceA)
 
     $choiceB = $('<button>')
     .addClass('choices')
     .attr('id', 'choiceB' + i)
     .text(questions[i].answerB)
+
+    $choiceB.click(function() {
+      //remove onclick for other buttons with the same # id
+      $(this).off('click')
+      $(this).siblings().off('click')
+
+
+      if($('#choiceB' + i).text() == questions[i].correct){
+        console.log('correct')
+         score++
+         //score calculator
+         console.log(score)
+         let scorePercentage = (score / questions.length)*100
+         $('#score').text(`Score: ${scorePercentage}%`)
+        $('#choiceB' + i).css('background', 'green')
+      } else {
+        console.log('wrong')
+        $('#choiceB' + i).css('background', 'red')
+      }
+    })
+
     $questionsDiv.append($choiceB)
 
     $choiceC = $('<button>')
     .addClass('choices')
     .attr('id', 'choiceC' + i)
     .text(questions[i].answerC)
+
+    $choiceC.click(function() {
+      //remove onclick for other buttons with the same # id
+      $(this).off('click')
+      $(this).siblings().off('click')
+
+
+      if($('#choiceC' + i).text() == questions[i].correct){
+        console.log('correct')
+        score++
+        //score calculator
+        console.log(score)
+        let scorePercentage = (score / questions.length)*100
+        $('#score').text(`Score: ${scorePercentage}%`)
+        $('#choiceC' + i).css('background', 'green')
+      } else {
+        console.log('wrong')
+        $('#choiceC' + i).css('background', 'red')
+      }
+    })
+
     $questionsDiv.append($choiceC)
 
     $choiceD = $('<button>')
     .addClass('choices')
     .attr('id', 'choiceD' + i)
     .text(questions[i].answerD)
+
+    $choiceD.click(function() {
+      //remove onclick for other buttons with the same # id
+      $(this).off('click')
+      $(this).siblings().off('click')
+
+
+      if($('#choiceD' + i).text() == questions[i].correct){
+        console.log('correct')
+        score++
+        //score calculator
+        console.log(score)
+        let scorePercentage = (score / questions.length)*100
+        $('#score').text(`Score: ${scorePercentage}%`)
+        $('#choiceD' + i).css('background', 'green')
+      } else {
+        console.log('wrong')
+        $('#choiceD' + i).css('background', 'red')
+      }
+    })
+
     $questionsDiv.append($choiceD)
+
+    $questionNumber = $('<p>')
+    .addClass('questionNumber')
+    .attr('id', 'questionNumber' + i)
+    .text(`${i+1} out of ${questions.length}`)
+    $questionsDiv.append($questionNumber)
+
+    //score calculator
+    console.log(score)
+    let scorePercentage = (score / questions.length)
+    $('#score').text(`Score: ${scorePercentage}`)
 
   }
 
-
+  // Questions carousel
   $('#questionsForm0').addClass('activeQ')
   $('#nextQuestionButton').click(function() {
 
@@ -420,7 +520,8 @@ $(() => {
     let buttonCheck = nextQuestion.next()
 
     if(buttonCheck.length === 0){
-      $('#nextQuestionButton').text('Submit')
+      $('#nextQuestionButton').text('Close')
+      .addClass('close')
     }
     if(nextQuestion.length === 0){
       $('#nextQuestionButton').hide()
@@ -449,9 +550,10 @@ $(() => {
     currentQuestion.removeClass('activeQ')
     previousQuestion.addClass('activeQ')
 
-
-
   })
+
+
+
 
 
   //---------------------------------------------------------------------------------------------------------------------//
