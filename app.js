@@ -364,12 +364,81 @@ $(() => {
   //----------------------------------------------------------------------------------------------------------------------//
   //Quiz script
 
+  $('#bookQuiz').on('click', (event) => {
+    $('#modal-container').css('display', 'block')
+  })
+
+
+  // trivia API
+  $.ajax({
+    url: 'https://opentdb.com/api.php?amount=10&category=10&difficulty=easy&type=multiple',
+    type: 'GET',
+  }).then(
+    (data) => {
+      console.log(data)
+
 
   const questions = [
-    {question: 'What Year Was Book Published', answerA: '1999', answerB: '1998', answerC: '2001', answerD: '2000', correct: '1999'},
-    {question: 'Who Is The Author Of Book', answerA: 'author1', answerB: 'author2', answerC: 'author3', answerD: 'author4', correct: 'author2'},
-    {question: 'What Year Was Book 2 Published', answerA: '2003', answerB: '2004', answerC: '2005', answerD: '2006', correct: '2005'},
-    {question: 'Who Is The Author Of Book2', answerA: 'author5', answerB: 'author6', answerC: 'author7', answerD: 'author8', correct: 'author8'}
+    {question: data.results[0].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[0].incorrect_answers[1],
+    answerB: data.results[0].incorrect_answers[0],
+    answerC: data.results[0].correct_answer,
+    answerD: data.results[0].incorrect_answers[2],
+    correct: data.results[0].correct_answer},
+    {question: data.results[1].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[1].correct_answer,
+    answerB: data.results[1].incorrect_answers[0],
+    answerC: data.results[1].incorrect_answers[1],
+    answerD: data.results[1].incorrect_answers[2],
+    correct: data.results[1].correct_answer},
+    {question: data.results[2].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[2].incorrect_answers[1],
+    answerB: data.results[2].correct_answer,
+    answerC: data.results[2].incorrect_answers[0],
+    answerD: data.results[2].incorrect_answers[2],
+    correct: data.results[2].correct_answer},
+    {question: data.results[3].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[3].incorrect_answers[1],
+    answerB: data.results[3].incorrect_answers[0],
+    answerC: data.results[3].correct_answer,
+    answerD: data.results[3].incorrect_answers[2],
+    correct: data.results[3].correct_answer},
+    {question: data.results[4].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[4].correct_answer,
+    answerB: data.results[4].incorrect_answers[0],
+    answerC: data.results[4].incorrect_answers[1],
+    answerD: data.results[4].incorrect_answers[2],
+    correct: data.results[4].correct_answer},
+    {question: data.results[5].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[5].incorrect_answers[1],
+    answerB: data.results[5].incorrect_answers[0],
+    answerC: data.results[5].incorrect_answers[2],
+    answerD: data.results[5].correct_answer,
+    correct: data.results[5].correct_answer},
+    {question: data.results[6].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[6].incorrect_answers[1],
+    answerB: data.results[6].correct_answer,
+    answerC: data.results[6].incorrect_answers[0],
+    answerD: data.results[6].incorrect_answers[2],
+    correct: data.results[6].correct_answer},
+    {question: data.results[7].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[7].incorrect_answers[1],
+    answerB: data.results[7].incorrect_answers[0],
+    answerC: data.results[7].correct_answer,
+    answerD: data.results[7].incorrect_answers[2],
+    correct: data.results[7].correct_answer},
+    {question: data.results[8].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[8].incorrect_answers[1],
+    answerB: data.results[8].incorrect_answers[0],
+    answerC: data.results[8].incorrect_answers[2],
+    answerD: data.results[8].correct_answer,
+    correct: data.results[8].correct_answer},
+    {question: data.results[9].question.replace(/&quot;/g, ' ').replace(/&#039;/g, ' '),
+    answerA: data.results[9].incorrect_answers[1],
+    answerB: data.results[9].correct_answer,
+    answerC: data.results[9].incorrect_answers[0],
+    answerD: data.results[9].incorrect_answers[2],
+    correct: data.results[9].correct_answer},
   ]
 
   let score = 0
@@ -522,6 +591,11 @@ $(() => {
     if(buttonCheck.length === 0){
       $('#nextQuestionButton').text('Close')
       .addClass('close')
+
+      $('.close').on('click', (event) => {
+        $('#modal-container').css('display', 'none')
+
+      })
     }
     if(nextQuestion.length === 0){
       $('#nextQuestionButton').hide()
@@ -549,6 +623,8 @@ $(() => {
 
     currentQuestion.removeClass('activeQ')
     previousQuestion.addClass('activeQ')
+
+  })
 
   })
 
