@@ -129,8 +129,24 @@ $(() => {
           .attr('href', 'https://www.amazon.com/s?k=' + data.items[i].volumeInfo.title)
           $div.append($bookAmazon)
 
+          $favorite = $('<a>')
+          .addClass('favorite')
+          .attr('id', 'favorite' + i)
+          $div.append($favorite)
+
+          //resource https://blog.logrocket.com/localstorage-javascript-complete-guide/
+
+          //add favorites to local storage.
+            $('#favorite' + i).on('click', (event) => {
+              localStorage.setItem(JSON.stringify('favBookTitle' + localStorage.length), JSON.stringify($('#favorite' + i).siblings('h2').html()))
+              console.log($('#favorite' + i).siblings('h2').html())
+            })
+
+        console.log(localStorage)
+
 
         }
+
 
       $('#bookDiv0').addClass('active')
       $('#next').click(function() {
@@ -158,27 +174,40 @@ $(() => {
     })
 
 
-    $.ajax({
-      url: 'https://random-word-api.herokuapp.com/word?number=1',
-      type: 'GET'
-    }).then(
-      (word) => {
-        console.log(word)
-
-        $.ajax({
-          url: url + 'intitle' + word + ':' + key,
-          type: 'GET'
-        }).then(
-          (data) => {
-            console.log(data)
-        })
-    })
-
-
-
-
-
   })
+
+  //--------------------- Local Storage Append & OnClick-----------//
+
+  //resource https://stackoverflow.com/questions/17745292/how-to-retrieve-all-localstorage-items-without-knowing-the-keys-in-advance
+
+  let favoriteBookTitles = []
+
+  keys = Object.keys(localStorage),
+  i = keys.length
+
+  while ( i-- ) {
+    favoriteBookTitles.push(localStorage.getItem(keys[i]));
+  }
+  console.log(localStorage)
+  console.log(favoriteBookTitles)
+
+  for (let i = 0; i < favoriteBookTitles.length; i++){
+    $favLi = $('<li>')
+    .text(favoriteBookTitles[i].replace(/"/g, ''))
+    $('.favList').append($favLi)
+  }
+  $('.favList').append($('<button>').text('Close').attr('id', 'favClose'))
+
+  $('#favClose').on('click', (event) => {
+    $('#favModal').css('display', 'none')
+  })
+
+  $('#favorites').on('click', (event) => {
+    $('#favModal').css('display', 'block')
+  })
+
+  //---------------------------------------------------------------//
+  //------------------ Random Word Function ------------------------//
 
   $('.random').on('click', (event) => {
 
@@ -339,34 +368,31 @@ $(() => {
 
     })
 
-    $.ajax({
-      url: 'https://random-word-api.herokuapp.com/word?number=1',
-      type: 'GET'
-    }).then(
-      (word) => {
-        console.log(word)
-
-        $.ajax({
-          url: url + 'intitle' + word + ':' + key,
-          type: 'GET'
-        }).then(
-          (data) => {
-            console.log(data)
-        })
-    })
-
-
-
-
 
   })
 
   //----------------------------------------------------------------------------------------------------------------------//
   //Quiz script
+  const startGame = () => {
 
-  $('#bookQuiz').on('click', (event) => {
-    $('#modal-container').css('display', 'block')
-  })
+
+  $('#modal-container').css('display', 'block')
+
+
+  $('#nextQuestionButton').show().text('Next').removeClass('close')
+  $('#prevQuestionButton').show()
+
+  $('#questionsForm0').remove()
+  $('#questionsForm1').remove()
+  $('#questionsForm2').remove()
+  $('#questionsForm3').remove()
+  $('#questionsForm4').remove()
+  $('#questionsForm5').remove()
+  $('#questionsForm6').remove()
+  $('#questionsForm7').remove()
+  $('#questionsForm8').remove()
+  $('#questionsForm9').remove()
+
 
 
   // trivia API
@@ -441,7 +467,10 @@ $(() => {
     correct: data.results[9].correct_answer},
   ]
 
+
+
   let score = 0
+  let scorePercentage = ''
 
   for (let i = 0; i < questions.length; i++){
 
@@ -574,9 +603,9 @@ $(() => {
     $questionsDiv.append($questionNumber)
 
     //score calculator
-    console.log(score)
-    let scorePercentage = (score / questions.length)
-    $('#score').text(`Score: ${scorePercentage}`)
+    // console.log(score)
+    // let scorePercentage = (score / questions.length)
+    // $('#score').text(`Score: ${scorePercentage}`)
 
   }
 
@@ -594,6 +623,18 @@ $(() => {
 
       $('.close').on('click', (event) => {
         $('#modal-container').css('display', 'none')
+
+        if (score < 3) {
+          alert('You can do better than that!')
+        } else if (score >= 3 && score < 7) {
+          alert('Good Try! You got it next time!')
+        } else if (score >= 6 && score < 10 ) {
+          alert('Great Job!')
+        } else if (score == 10) {
+          alert('Your a Book Whiz!')
+        }
+
+        $('.questionsForm').last().removeClass('activeQ')
 
       })
     }
@@ -626,9 +667,13 @@ $(() => {
 
   })
 
+
   })
 
-
+}
+$('#bookQuiz').on('click', (event) => {
+  startGame()
+})
 
 
 
